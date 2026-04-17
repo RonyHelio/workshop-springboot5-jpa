@@ -1,14 +1,19 @@
 package com.educandoweb.course.entities;
 
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+@Entity
+@Table(name = "tb_user")
 
-//duvidas sobre o que é serializable, hasc e equals
+public class User implements Serializable { //Essa classe pode ser transformada em bytes (serializada)
+    private static final long serialVersionUID = 1L; //ID de versão da classe
 
-public class User implements Serializable {
-    private static final long serialVersionUID = 1L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String email;
@@ -68,7 +73,7 @@ public class User implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o) { //define quando dois objetos são iguais
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
@@ -76,7 +81,7 @@ public class User implements Serializable {
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode() { //Gera um número baseado no objeto
         return Objects.hashCode(id);
     }
 
