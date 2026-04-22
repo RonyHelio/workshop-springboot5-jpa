@@ -21,8 +21,10 @@ public class Order implements Serializable {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd`T`HH:mm:ss`Z`",
             timezone = "GMT")
-    private Instant moment;
 
+
+    private Instant moment;
+    private Integer status;
 
     @ManyToOne
     @JoinColumn(name = "cliente_id") //Cria a coluna da chave estrangeira no banco
@@ -32,10 +34,11 @@ public class Order implements Serializable {
 
     }
 
-    public Order(Long id, Instant moment, User client) {
+    public Order(Long id, Instant moment, User client, OrderStatus order_status) {
         this.id = id;
         this.moment = moment;
         this.client = client;
+        setStatus(order_status);
     }
 
     public Long getId() {
@@ -60,6 +63,16 @@ public class Order implements Serializable {
 
     public void setClient(User client) {
         this.client = client;
+    }
+
+    public OrderStatus getStatus() {
+        return OrderStatus.valueOf(status);
+    }
+
+    public void setStatus(OrderStatus status) {
+        if (status != null) {
+            this.status = status.getCode();
+        }
     }
 
     @Override
