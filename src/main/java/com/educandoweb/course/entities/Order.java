@@ -38,6 +38,9 @@ public class Order implements Serializable {
 
     }
 
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL) //As duas entidades tem o mesmo ID
+    private Payment payment;
+
     public Order(Long id, Instant moment, User client, OrderStatus order_status) {
         this.id = id;
         this.moment = moment;
@@ -77,6 +80,14 @@ public class Order implements Serializable {
         if (status != null) {
             this.status = status.getCode();
         }
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 
     @Override
