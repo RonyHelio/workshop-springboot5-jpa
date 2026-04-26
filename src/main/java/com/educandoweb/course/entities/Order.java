@@ -6,7 +6,9 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 
 @Entity //anotação que afirma que irá se tornar uma tabela
@@ -19,16 +21,18 @@ public class Order implements Serializable {
 
     private Long id;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd`T`HH:mm:ss`Z`",
-            timezone = "GMT")
 
-
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Instant moment;
+
     private Integer status;
 
     @ManyToOne
     @JoinColumn(name = "cliente_id") //Cria a coluna da chave estrangeira no banco
     private User client; //um pedido tem um cliente
+
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItem> items = new HashSet<>();
 
     public Order( ) {
 
@@ -81,6 +85,10 @@ public class Order implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
         return Objects.equals(id, order.id);
+    }
+
+    public Set<OrderItem> getItems() {
+        return items;
     }
 
     @Override

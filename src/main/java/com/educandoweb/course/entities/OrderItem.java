@@ -1,6 +1,7 @@
 package com.educandoweb.course.entities;
 
 import com.educandoweb.course.entities.pk.OrderItemPK;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -14,9 +15,9 @@ import java.util.Objects;
 
 public class OrderItem implements Serializable { //Essa classe pode ser transformada em bytes (serializada)
     private static final long serialVersionUID = 1L; //ID de versão da classe{
-    
+
     @EmbeddedId
-    private OrderItemPK id;
+    private OrderItemPK id = new OrderItemPK();
     private Integer quantity;
     private Double price;
 
@@ -32,6 +33,7 @@ public class OrderItem implements Serializable { //Essa classe pode ser transfor
         this.price = price;
     }
 
+    @JsonIgnore
     public Order getOrder() {
         return id.getOrder();
     }
