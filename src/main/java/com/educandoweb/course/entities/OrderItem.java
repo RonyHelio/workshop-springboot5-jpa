@@ -42,6 +42,7 @@ public class OrderItem implements Serializable { //Essa classe pode ser transfor
         id.setOrder(order);
     }
 
+
     public Product getProduct() {
         return id.getProduct();
     }
