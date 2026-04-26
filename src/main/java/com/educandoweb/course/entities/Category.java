@@ -20,6 +20,7 @@ public class Category implements Serializable { //Essa classe pode ser transform
     private Long id;
     private String name;
 
+
     @JsonIgnore
     @ManyToMany(mappedBy = "categories")
     private Set<Product> products = new HashSet<>();
