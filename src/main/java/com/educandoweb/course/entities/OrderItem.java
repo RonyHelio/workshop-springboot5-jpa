@@ -13,8 +13,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "tb_order_item")
 
-public class OrderItem implements Serializable { //Essa classe pode ser transformada em bytes (serializada)
-    private static final long serialVersionUID = 1L; //ID de versão da classe{
+public class OrderItem implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @EmbeddedId
     private OrderItemPK id = new OrderItemPK();
@@ -65,6 +65,10 @@ public class OrderItem implements Serializable { //Essa classe pode ser transfor
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public double getSubTotal(){
+        return price * quantity;
     }
 
     @Override
