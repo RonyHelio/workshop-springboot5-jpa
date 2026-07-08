@@ -31,3 +31,12 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Custom Exclusions ###
+*.class
+*.log
+*.jar
+*.war
+*.zip
+*.tar.gz
+node_modules/
